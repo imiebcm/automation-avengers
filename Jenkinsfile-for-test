@@ -5,6 +5,11 @@ pipeline
     }
   }
   stages {
+    stage('Checkout Source') {
+      steps {
+        git branch: 'k8s-deployment', url: 'https://github.com/imiebcm/automation-avengers'
+      }
+    }
     stage ('Build') {
       steps {
         sh 'python -m py_compile src/app.py'
