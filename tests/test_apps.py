@@ -1,6 +1,6 @@
 import unittest
 from flask import url_for
-from src.apps import app
+# from src.apps import app
 
 class TestHelloWorld(unittest.TestCase):
     def setUp(self):
