@@ -17,7 +17,7 @@ pipeline {
             steps {
                 sh '''
                 python${PYTHON_VERSION} -m venv devenv
-                source ./devenv/Scripts/activate
+                source devenv/Scripts/activate
                 pip install -r requirements.txt
                 '''
             }
