@@ -16,7 +16,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 sh '''
-                python -m venv devenv
+                python${PYTHON_VERSION} -m venv devenv
                 source devenv/bin/activate
                 pip install -r requirements.txt
                 '''
