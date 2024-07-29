@@ -6,13 +6,13 @@ pipeline {
     }
 
     stages {
-
+/*
         stage('Checkout') {
             steps {
                 git 'https://github.com/imiebcm/automation-avengers/tree/for-test2'
             }
         }
-
+*/
         stage('Install Dependencies') {
             steps {
                 sh '''
