@@ -1,0 +1,41 @@
+pipeline {
+    agent any
+
+    environment {
+        PYTHON_VERSION = '3.11'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/imiebcm/automation-avengers/tree/for-test2'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh '''
+                python${PYTHON_VERSION} -m venv devenv
+                source devenv/bin/activate
+                pip install -r requirements.txt
+                '''
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                sh '''
+                source devenv/bin/activate
+                python -m unittest discover -s tests\test_apps.py
+                '''
+            }
+        }
+    }
+
+    post {
+        always {
+            archiveArtifacts artifacts: '**/test-reports/*.xml', allowEmptyArchive: true
+            junit '**/test-reports/*.xml'
+        }
+    }
+}
