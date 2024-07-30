@@ -1,0 +1,31 @@
+pipeline {
+  environment {
+    dockerimagename = "abidzar/automation-avangers"
+    dockerImage = ""
+  }
+  agent any
+  stages {
+    /*
+    stage('Checkout Source') {
+      steps {
+        git branch: 'k8s-deployment', url: 'https://github.com/naeem-bebit/automation-avengers'
+      }
+    }
+    
+    stage('Build image') {
+      steps{
+        script {
+            dockerImage = docker.build("${env.dockerimagename}:latest")
+        }
+      }
+    }
+    */
+    stage('Test') {
+        steps {
+            script {
+                sh  "docker run --rm --tty --name avangers ${env.dockerimagename}:latest sh -c 'python ./tests/test_app.py'"
+            }
+        }
+    }
+  }
+}
